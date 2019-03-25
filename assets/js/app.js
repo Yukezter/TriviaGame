@@ -62,6 +62,7 @@
             initVariables();
             nextQuestion();
             $('#game').fadeIn(fadeTime);
+            session.paused = false;
         });
     }
 
@@ -72,9 +73,6 @@
             session.randomIndex = Math.floor(Math.random() * categoryLength);
             session.questionObj = session.category.clues[session.randomIndex];
             session.questionNumber++;
-
-            console.log(session.questionObj.question);
-            console.log(session.questionObj.answer);
 
             $('#alert').text('Question ' + session.questionNumber + ' of 20');
             $('#question').text(session.questionObj.question);
@@ -90,18 +88,47 @@
 
     function checkAnswer(userAnswer) {
 
+        // RegEx functions
+        function removeChars(str) {
+            var charsToReplace = /[\/\\"',\.]| &|& /g;
+            str = str.replace(charsToReplace, '');
+            str = str.replace(/-/g, ' ');
+            return str;
+        }
+
+        function removeWords(str) {
+            var wordsToReplace = /the | the|or | or|a | a/g;
+            str = str.replace(/ *\([^)]*\) */g, '');
+            str = str.toLowerCase().replace(wordsToReplace, '');
+            return str;
+        }
+
+        function cleanAnswer(str) {
+            var stuffToReplace = /<i>|<\/i>/g;
+            str = str.replace(stuffToReplace, '');
+            return str;
+        }
+
+        function wordsInParenthesis(str) {
+            var parenthesis = /\(([^)]+)\)/;
+            var matches = parenthesis.exec(str);
+            return matches != null ? matches[1] : undefined;
+        }
+
+        session.questionObj.answer = cleanAnswer(session.questionObj.answer);
         var userAnswerOne = removeChars(userAnswer);
         var answerOne = removeChars(session.questionObj.answer);
-        var userAnswerTwo = removeWords(userAnswer);
-        var answerTwo = removeWords(session.questionObj.answer);
-
-        console.log(userAnswerOne);
-        console.log(userAnswerTwo);
+        var userAnswerTwo = removeWords(userAnswerOne);
+        var answerTwo = removeWords(answerOne);
+        var answerThree = wordsInParenthesis(answerOne);
 
         if (userAnswerOne === answerOne) {
             $('#alert').text('Correct!');
             session.correctAnswers++;
         } else if (userAnswerTwo === answerTwo) {
+            $('#alert').text('Correct!');
+            session.correctAnswers++;
+        } else if (userAnswerTwo === answerThree) {
             $('#alert').text('Correct!');
             session.correctAnswers++;
         } else {
@@ -169,41 +196,29 @@
         }, 5000);
     }
 
-
-
-    // RegEx functions
-    function removeChars(str) {
-        var charsToReplace = /[\/\\"'()]| &|& /g;
-        str = str.replace(charsToReplace, '');
-        return str;
-    }
-
-    function removeWords(str) {
-        var wordsToReplace = / the|the | or|or /g;
-        str = str.toLowerCase().replace(wordsToReplace, '');
-        return str;
-    }
-
     // Click events
     $('.category').on('click', function() {
 
-        var categoryId = $(this).val();
-        var urlQuery = 'https://cors-anywhere.herokuapp.com/http://jservice.io/api/category?id=' + categoryId;
-    
-        $.ajax({
-            url: urlQuery,
-            method: 'GET',
-            type: 'json',
-        }).then(function(res) {
-            session.category = res;
-            // One of the sports answers is wrong
-            if (session.category.title === 'sports') {
-                session.category.clues[29].answer = 'ole';
-            }
-            startGame();
-        }).fail(function() {
+        if (!session.paused) {
+            session.paused = true;
+            var categoryId = $(this).val();
+            var urlQuery = 'https://cors-anywhere.herokuapp.com/http://jservice.io/api/category?id=' + categoryId;
+        
+            $.ajax({
+                url: urlQuery,
+                method: 'GET',
+                type: 'json',
+            }).then(function(res) {
+                session.category = res;
+                // One of the sports answers is wrong
+                if (session.category.title === 'sports') {
+                    session.category.clues[29].answer = 'ole';
+                }
+                startGame();
+            }).fail(function() {
 
-        });
+            });
+        }
     });
 
     $('#submit-btn').on('click', function() {
@@ -221,7 +236,7 @@
 
     $('#next-question-btn').on('click', function() {
         if (!session.paused) {
-            $('#alert').text('There you go.');
+            $('#alert').text('Here you go.');
             session.incorrectAnswers++;
             timeoutAnswer();
         }
