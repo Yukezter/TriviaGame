@@ -188,11 +188,12 @@
     $('.category').on('click', function() {
 
         var categoryId = $(this).val();
-        var urlQuery = 'http://jservice.io/api/category?id=' + categoryId;
+        var urlQuery = 'https://cors-anywhere.herokuapp.com/http://jservice.io/api/category?id=' + categoryId;
     
         $.ajax({
             url: urlQuery,
             method: 'GET',
+            type: 'json',
         }).then(function(res) {
             session.category = res;
             // One of the sports answers is wrong
