@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Baloo+Chettan"> 
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <div class="container text-center" id="wrapper">
+        <h1 class="main-heading">Trivia Quiz</h1>
+        <div id="categories">
+            <h2 class="second-heading py-3">Pick a category.</h2>
+            <div class="row mt-md-4">
+                <div class="col-6">
+                    <input type="image" src="assets/images/sports.jpg" class="category rounded-circle" id="sports" value="42"/>
+                    <label for="sports">Sports</label>
+                </div>
+                <div class="col-6">
+                    <input type="image" src="assets/images/american-history.jpg" class="category rounded-circle" id="american-history" value="780"/>
+                    <label for="american-history">American History</label>
+                </div>
+                <div class="col-6">
+                    <input type="image" src="assets/images/science.jpg" class="category rounded-circle" id="science" value="25"/>
+                    <label for="science">Science</label>
+                </div>
+                <div class="col-6">
+                    <input type="image" src="assets/images/animals.jpg" class="category rounded-circle" id="animals" value="21"/>
+                    <label for="animals">Animals</label>
+                </div>
+            </div>
+        </div>
+        <div id="game">
+            <div class="row">
+                <div class="col-12">
+                    <p id="time-and-stats">
+                        <span id="time">Time remaining (sec): <span id="timer">60</span></span>
+                        <br>
+                        Correct: <span id="correct">0</span>
+                        <br>
+                        Incorrect: <span id="incorrect">0</span>
+                    </p>
+                    <h2><span id="alert"></span></h2>
+                    <p id="question"></p>
+                    <p class="answer d-none">Answer: <span id="answer"></span></p>
+                    <p class="user-answer d-none">Your answer: <span id="user-answer"></span></p>
+                    <input type="text" class="mx-auto my-1" id="answer-input">
+                    <div class="invalid d-none">Please provide a valid answer.</div>
+                    <button type="button" class="btn btn-dark rounded-0 my-2" id="submit-btn">Submit</button>
+                    <button type="button" class="btn btn-dark rounded-0 my-2" id="next-question-btn">Skip Question</button>
+                    <button type="button" class="btn btn-dark d-none rounded-0 my-2" id="restart-btn">Play Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+html, body {
+  height: 100%; }
+
+#wrapper {
+  height: 100%;
+  min-height: 100%;
+  overflow: hidden; }
+
+body {
+  background: #50514f;
+  font-family: "Baloo Chettan";
+  color: #fffcff; }
+
+.main-heading {
+  top: 40%;
+  position: relative; }
+
+#categories {
+  position: relative;
+  top: 7%; }
+  #categories .category {
+    display: block;
+    margin: 10px auto;
+    width: 110px;
+    height: 110px; }
+    @media (min-width: 576px) {
+      #categories .category {
+        width: 132px;
+        height: 132px; } }
+    @media (min-width: 768px) {
+      #categories .category {
+        width: 154px;
+        height: 154px; } }
+    @media (min-width: 992px) {
+      #categories .category {
+        width: 198px;
+        height: 198px; } }
+  #categories label {
+    border-top: 1px solid #cbd4c2; }
+
+#game {
+  position: relative;
+  top: 15%; }
+  #game #answer-input {
+    display: block; }
+  #game .invalid {
+    color: #f13f3f; }
+  #game button {
+    background: #247ba0; }
+
+html {
+  font-size: 1rem; }
+  @media (min-width: 576px) {
+    html {
+      font-size: 1.2rem; } }
+  @media (min-width: 768px) {
+    html {
+      font-size: 1.4rem; } }
+  @media (min-width: 992px) {
+    html {
+      font-size: 1.6rem; } }
