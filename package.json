@@ -1,0 +1,22 @@
+{
+  "name": "triviagame",
+  "version": "1.0.0",
+  "description": "Trivia game",
+  "main": "index.js",
+  "scripts": {
+    "sass": "node-sass -w assets/scss -o assets/css --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yukezter/TriviaGame.git"
+  },
+  "author": "Bryan Hinchliffe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yukezter/TriviaGame/issues"
+  },
+  "homepage": "https://github.com/Yukezter/TriviaGame#readme",
+  "dependencies": {
+    "node-sass": "^4.11.0"
+  }
+}
