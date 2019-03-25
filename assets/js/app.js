@@ -188,7 +188,7 @@
     $('.category').on('click', function() {
 
         var categoryId = $(this).val();
-        var urlQuery = 'http://jservice.io/api/category?id=' + categoryId;
+        var urlQuery = '//jservice.io/api/category?id=' + categoryId;
     
         $.ajax({
             url: urlQuery,
